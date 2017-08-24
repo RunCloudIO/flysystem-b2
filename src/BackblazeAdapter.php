@@ -1,6 +1,6 @@
 <?php
 
-namespace Mhetreramesh\Flysystem;
+namespace RunCloudIO\FlysystemB2;
 
 use ChrisWhite\B2\Client;
 use GuzzleHttp\Psr7\StreamWrapper;

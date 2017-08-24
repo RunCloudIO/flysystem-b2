@@ -1,9 +1,9 @@
 {
-    "name": "mhetreramesh/flysystem-backblaze",
+    "name": "runcloudio/flysystem-b2",
     "type": "library",
-    "description": "Backblaze adapter for the flysystem filesystem abstraction library",
+    "description": "Backblaze adapter for the flysystem filesystem abstraction library. A fork from https://github.com/mhetreramesh/flysystem-backblaze and maintained as separate package.",
     "keywords": ["flysystem", "filesystem", "api", "backblaze", "client"],
-    "homepage": "https://github.com/mhetreramesh/flysystem-backblaze",
+    "homepage": "https://github.com/RunCloudIO/flysystem-b2",
     "license": "MIT",
     "authors": [
         {
@@ -11,6 +11,11 @@
             "email": "mhetreramesh@gmail.com",
             "homepage": "https://about.me/rameshmhetre",
             "role": "Developer"
+        }, {
+            "name": "Ahmad Fikrizaman",
+            "email": "fikri@runcloud.io",
+            "homepage": "https://runcloud.io",
+            "role": "CTO"
         }
     ],
     "require": {
@@ -26,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Mhetreramesh\\Flysystem\\": "src"
+            "RunCloudIO\\Flysystem\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Mhetreramesh\\Flysystem\\Tests\\": "tests"
+            "RunCloudIO\\Flysystem\\Tests\\": "tests"
         }
     },
     "scripts": {

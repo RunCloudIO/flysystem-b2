@@ -1,29 +1,51 @@
-# flysystem-backblaze
+# flysystem-b2
 
-[![Author](http://img.shields.io/badge/author-@mhetreramesh-blue.svg?style=flat-square)](https://twitter.com/mhetreramesh)
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/mhetreramesh/flysystem-backblaze.svg?style=flat-square)](https://packagist.org/packages/mhetreramesh/flysystem-backblaze)
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/gliterd/flysystem-backblaze/master.svg?style=flat-square)](https://travis-ci.org/gliterd/flysystem-backblaze)
-[![Coverage Status][ico-scrutinizer]][link-scrutinizer]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Total Downloads](https://img.shields.io/packagist/dt/mhetreramesh/flysystem-backblaze.svg?style=flat-square)](https://packagist.org/packages/mhetreramesh/flysystem-backblaze)
+This is a fork based on https://github.com/mhetreramesh/flysystem-backblaze. It includes download file stream. Since B2 SDK from original package no longer maintained (Last PR merge is November 2016), I'm including the B2 SDK that I've forked and modified. This package also include ServiceProvider for Laravel.
 
 Visit (https://secure.backblaze.com/b2_buckets.htm) and get your account id, application key.
 
-The Backblaze adapter gives the possibility to use the Flysystem filesystem abstraction library with backblaze. It uses the [Backblaze B2 SDK](https://github.com/cwhite92/b2-sdk-php) to communicate with the API.
+The Backblaze adapter gives the possibility to use the Flysystem filesystem abstraction library with backblaze. It uses the [Backblaze B2 SDK](https://github.com/RunCloudIO/b2-sdk-php) to communicate with the API.
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require mhetreramesh/flysystem-backblaze
+$ composer require runcloudio/flysystem-b2
 ```
 
-## Usage
+## Usage with Laravel
+
+
+In your app.php config file add to the list of service providers:
+```
+\RunCloudIO\FlysystemB2\BackblazeServiceProvider::class,
+```
+
+Add the following to your filesystems.php config file in the ```disks``` section:
+```
+'b2' => [
+    'driver'         => 'b2',
+    'accountId'      => '',
+    'applicationKey' => '',
+    'bucketName'     => '',
+],
+```
+
+Just use it as you normally would use the Storage facade.
+```
+\Storage::disk('b2')->put('test.txt', 'test')
+```
+and
+```
+\Storage::disk('b2')->get('test.txt')
+```
+
+
+## Usage without Laravel
 
 ``` php
-use Mhetreramesh\Flysystem\BackblazeAdapter;
+use RunCloudIO\FlysystemB2\BackblazeAdapter;
 use League\Flysystem\Filesystem;
 use ChrisWhite\B2\Client;
 
