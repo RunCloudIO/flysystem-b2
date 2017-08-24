@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "RunCloudIO\\Flysystem\\": "src"
+            "RunCloudIO\\FlysystemB2\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "RunCloudIO\\Flysystem\\Tests\\": "tests"
+            "RunCloudIO\\FlysystemB2\\Tests\\": "tests"
         }
     },
     "scripts": {
