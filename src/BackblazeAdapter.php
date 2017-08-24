@@ -3,11 +3,13 @@
 namespace Mhetreramesh\Flysystem;
 
 use ChrisWhite\B2\Client;
+use GuzzleHttp\Psr7\StreamWrapper;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 use League\Flysystem\Config;
 
-class BackblazeAdapter extends AbstractAdapter {
+class BackblazeAdapter extends AbstractAdapter
+{
 
     use NotSupportingVisibilityTrait;
 
@@ -17,7 +19,7 @@ class BackblazeAdapter extends AbstractAdapter {
 
     public function __construct(Client $client, $bucketName)
     {
-        $this->client = $client;
+        $this->client     = $client;
         $this->bucketName = $bucketName;
     }
 
@@ -36,8 +38,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         $file = $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $path,
-            'Body' => $contents
+            'FileName'   => $path,
+            'Body'       => $contents,
         ]);
         return $this->getFileInfo($file);
     }
@@ -49,8 +51,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         $file = $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $path,
-            'Body' => $resource
+            'FileName'   => $path,
+            'Body'       => $resource,
         ]);
         return $this->getFileInfo($file);
     }
@@ -62,8 +64,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         $file = $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $path,
-            'Body' => $contents
+            'FileName'   => $path,
+            'Body'       => $contents,
         ]);
         return $this->getFileInfo($file);
     }
@@ -75,8 +77,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         $file = $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $path,
-            'Body' => $resource
+            'FileName'   => $path,
+            'Body'       => $resource,
         ]);
         return $this->getFileInfo($file);
     }
@@ -88,10 +90,10 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         $file = $this->getClient()->getFile([
             'BucketName' => $this->bucketName,
-            'FileName' => $path
+            'FileName'   => $path,
         ]);
         $fileContent = $this->getClient()->download([
-            'FileId' => $file->getId()
+            'FileId' => $file->getId(),
         ]);
         return ['contents' => $fileContent];
     }
@@ -101,7 +103,19 @@ class BackblazeAdapter extends AbstractAdapter {
      */
     public function readStream($path)
     {
-        return false;
+        $file = $this->getClient()->getFile([
+            'BucketName' => $this->bucketName,
+            'FileName'   => $path,
+        ]);
+
+        $fileContent = $this->getClient()->download([
+            'FileId' => $file->getId(),
+            'stream' => true,
+        ]);
+
+        $resource = StreamWrapper::getResource($fileContent);
+
+        return ['type' => 'file', 'path' => $path, 'stream' => $resource];
     }
 
     /**
@@ -119,8 +133,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         return $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $newPath,
-            'Body' => @file_get_contents($path)
+            'FileName'   => $newPath,
+            'Body'       => @file_get_contents($path),
         ]);
     }
 
@@ -147,8 +161,8 @@ class BackblazeAdapter extends AbstractAdapter {
     {
         return $this->getClient()->upload([
             'BucketName' => $this->bucketName,
-            'FileName' => $path,
-            'Body' => ''
+            'FileName'   => $path,
+            'Body'       => '',
         ]);
     }
 
@@ -222,10 +236,10 @@ class BackblazeAdapter extends AbstractAdapter {
     protected function getFileInfo($file)
     {
         $normalized = [
-            'type' => 'file',
-            'path' => $file->getName(),
+            'type'      => 'file',
+            'path'      => $file->getName(),
             'timestamp' => substr($file->getUploadTimestamp(), 0, -3),
-            'size' => $file->getSize()
+            'size'      => $file->getSize(),
         ];
 
         return $normalized;
