@@ -2,7 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-We accept contributions via Pull Requests on [Github](https://github.com/mhetreramesh/flysystem-backblaze).
+We accept contributions via Pull Requests on [Github](https://github.com/RunCloudIO/flysystem-b2).
 
 
 ## Pull Requests

@@ -71,11 +71,11 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) and [CONDUCT](CONDUCT.md) for details
 
 ## Security
 
-If you discover any security related issues, please email mhetreramesh@gmail.com instead of using the issue tracker.
+If you discover any security related issues, please email fikri@runcloud.io instead of using the issue tracker.
 
 ## Credits
 
-- [Ramesh Mhetre][link-author]
+- [RunCloudIO][link-author]
 - [All Contributors][link-contributors]
 
 ## License
@@ -94,5 +94,5 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 [link-scrutinizer]: https://scrutinizer-ci.com/g/gliterd/flysystem-backblaze/code-structure
 [link-code-quality]: https://scrutinizer-ci.com/g/gliterd/flysystem-backblaze
 [link-downloads]: https://packagist.org/packages/mhetreramesh/flysystem-backblaze
-[link-author]: https://github.com/mhetreramesh
+[link-author]: https://github.com/RunCloudIO
 [link-contributors]: ../../contributors
