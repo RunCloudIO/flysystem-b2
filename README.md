@@ -17,12 +17,14 @@ $ composer require runcloudio/flysystem-b2
 ## Usage with Laravel
 
 
-In your app.php config file add to the list of service providers:
+If you are using **Laravel 5.4 and below**, add this line to app.php inside list of Service Providers.:
 ```
 \RunCloudIO\FlysystemB2\BackblazeServiceProvider::class,
 ```
 
-Add the following to your filesystems.php config file in the ```disks``` section:
+Starting from Laravel 5.5, they implements **Package Auto Discovery**, so you don't have to add the service provider.
+
+Doesn't matter which Laravel version you are using, add the following to your filesystems.php config file in the ```disks``` section:
 ```
 'b2' => [
     'driver'         => 'b2',
