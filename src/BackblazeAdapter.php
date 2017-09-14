@@ -10,17 +10,17 @@ use League\Flysystem\Config;
 
 class BackblazeAdapter extends AbstractAdapter
 {
-
     use NotSupportingVisibilityTrait;
 
-    protected $client;
-
+    protected $accountId;
+    protected $applicationKey;
     protected $bucketName;
 
-    public function __construct(Client $client, $bucketName)
+    public function __construct($accountId, $applicationKey, $bucketName)
     {
-        $this->client     = $client;
-        $this->bucketName = $bucketName;
+        $this->accountId      = $accountId;
+        $this->applicationKey = $applicationKey;
+        $this->bucketName     = $bucketName;
     }
 
     /**
@@ -207,7 +207,7 @@ class BackblazeAdapter extends AbstractAdapter
      */
     public function getClient()
     {
-        return $this->client;
+        return new Client($this->accountId, $this->applicationKey);
     }
 
     /**

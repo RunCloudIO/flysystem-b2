@@ -2,7 +2,6 @@
 
 namespace RunCloudIO\FlysystemB2;
 
-use ChrisWhite\B2\Client;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
@@ -19,8 +18,7 @@ class BackblazeServiceProvider extends ServiceProvider
                 isset($config['bucketName']))) {
                 throw new \Exception('Please set all configuration keys. (accountId, applicationKey, bucketName)');
             }
-            $client  = new Client($config['accountId'], $config['applicationKey']);
-            $adapter = new BackblazeAdapter($client, $config['bucketName']);
+            $adapter = new BackblazeAdapter($config['accountId'], $config['applicationKey'], $config['bucketName']);
             return new Filesystem($adapter);
         });
     }
