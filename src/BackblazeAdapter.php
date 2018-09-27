@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\StreamWrapper;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\Adapter\Polyfill\NotSupportingVisibilityTrait;
 use League\Flysystem\Config;
+use League\Flysystem\Util;
 
 class BackblazeAdapter extends AbstractAdapter
 {
@@ -116,6 +117,19 @@ class BackblazeAdapter extends AbstractAdapter
         $resource = StreamWrapper::getResource($fileContent);
 
         return ['type' => 'file', 'path' => $path, 'stream' => $resource];
+    }
+
+    public function accelRedirectData($path)
+    {
+        $path = Util::normalizePath($path);
+        $file = $this->getClient()->getFile([
+            'BucketName' => $this->bucketName,
+            'FileName'   => $path,
+        ]);
+
+        return $this->getClient()->accelRedirectData([
+            'FileId' => $file->getId(),
+        ]);
     }
 
     /**
